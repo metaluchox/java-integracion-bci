@@ -46,7 +46,11 @@ Se recomienda ir directo a swagger
 
 ```mermaid
 graph TB
-    Cliente ->  Controller -> Service -> Repository ->  DB[(H2 Database)]
+    Cliente[Cliente HTTP]
+    Controller[Controller Layer]
+    Service[Service Layer]
+    Repository[Repository Layer]
+    DB[(H2 Database)]
 
     Cliente -->|HTTP Request| Controller
     Controller -->|DTO| Service
@@ -57,6 +61,11 @@ graph TB
     Service -->|Response| Controller
     Controller -->|JSON| Cliente
 
+    style Cliente fill:#e1f5ff
+    style Controller fill:#fff4e1
+    style Service fill:#f0e1ff
+    style Repository fill:#e1ffe1
+    style DB fill:#ffe1e1
 ```
 
 ## Modelo de Datos

@@ -79,14 +79,15 @@ class UserServiceTest {
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
         when(jwtService.generateToken(anyString(), any(UUID.class))).thenReturn("mock-jwt-token");
 
-        // Act
+        
         UserResponse response = userService.registerUser(request);
 
-        // Assert
+        
         assertNotNull(response);
         assertNotNull(response.getId());
         assertEquals("mock-jwt-token", response.getToken());
         assertTrue(response.getIsActive());
+        
         verify(userRepository).existsByEmail("juan@rodriguez.org");
         verify(userRepository).save(any(User.class));
         verify(jwtService).generateToken(anyString(), any(UUID.class));

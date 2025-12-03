@@ -40,7 +40,7 @@ class UserControllerTest {
 
     @Test
     void registerUser_WithValidData_ShouldReturnCreated() throws Exception {
-        // Arrange
+
         UserRegistrationRequest request = UserRegistrationRequest.builder()
                 .name("Juan Rodriguez")
                 .email("juan@rodriguez.org")
@@ -63,7 +63,6 @@ class UserControllerTest {
 
         when(userService.registerUser(any(UserRegistrationRequest.class))).thenReturn(response);
 
-        // Act & Assert
         mockMvc.perform(post("/api/users/sign-up")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
@@ -76,7 +75,7 @@ class UserControllerTest {
 
     @Test
     void registerUser_WithDuplicateEmail_ShouldReturnConflict() throws Exception {
-        // Arrange
+        
         UserRegistrationRequest request = UserRegistrationRequest.builder()
                 .name("Juan Rodriguez")
                 .email("juan@rodriguez.org")
@@ -87,7 +86,6 @@ class UserControllerTest {
         when(userService.registerUser(any(UserRegistrationRequest.class)))
                 .thenThrow(new DuplicateEmailException("El correo ya registrado"));
 
-        // Act & Assert
         mockMvc.perform(post("/api/users/sign-up")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
@@ -98,7 +96,7 @@ class UserControllerTest {
 
     @Test
     void registerUser_WithInvalidEmail_ShouldReturnBadRequest() throws Exception {
-        // Arrange
+        
         UserRegistrationRequest request = UserRegistrationRequest.builder()
                 .name("Juan Rodriguez")
                 .email("invalid-email")
@@ -109,7 +107,7 @@ class UserControllerTest {
         when(userService.registerUser(any(UserRegistrationRequest.class)))
                 .thenThrow(new ValidationException("El formato del correo es inválido"));
 
-        // Act & Assert
+        
         mockMvc.perform(post("/api/users/sign-up")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
@@ -120,14 +118,13 @@ class UserControllerTest {
 
     @Test
     void registerUser_WithMissingFields_ShouldReturnBadRequest() throws Exception {
-        // Arrange
+        
         UserRegistrationRequest request = UserRegistrationRequest.builder()
                 .name("")
                 .email("")
                 .password("")
                 .build();
 
-        // Act & Assert
         mockMvc.perform(post("/api/users/sign-up")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))

@@ -47,9 +47,9 @@ Se recomienda ir directo a swagger
 ```mermaid
 graph TB
     Cliente[Cliente HTTP]
-    Controller[Controller Layer]
-    Service[Service Layer]
-    Repository[Repository Layer]
+    Controller[Controller]
+    Service[Service]
+    Repository[Repository]
     DB[(H2 Database)]
 
     Cliente -->|HTTP Request| Controller
